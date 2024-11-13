@@ -35,3 +35,18 @@ You can click the Preview link to take a look at your changes.
     </script>
 </body>
 </html>
+from flask import Flask, jsonify
+from flask_cors import CORS
+
+app = Flask(__name__)
+CORS(app)  # Enable Cross-Origin Resource Sharing for local testing
+
+@app.route('/message')
+def get_message():
+    return jsonify(message="Hello from the Python backend!")
+
+if __name__ == '__main__':
+    app.run(debug=True)
+    pip install Flask
+    python app.py
+    
