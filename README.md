@@ -1,52 +1,46 @@
-- 👋 Hi, I’m @Junn096
-- 👀 I’m interested in ...
-- 🌱 I’m currently learning ...
-- 💞️ I’m looking to collaborate on ...
-- 📫 How to reach me ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
-
-<!---
-Junn096/Junn096 is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-You can click the Preview link to take a look at your changes.
---->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Flask and JavaScript App</title>
+    <title>File Upload</title>
 </head>
 <body>
-    <h1>Welcome to My Website</h1>
-    <button onclick="fetchMessage()">Get Message from Python Backend</button>
-    <p id="message"></p>
-
-    <script>
-        async function fetchMessage() {
-            try {
-                const response = await fetch('http://127.0.0.1:5000/message');
-                const data = await response.json();
-                document.getElementById('message').textContent = data.message;
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        }
-    </script>
+    <h2>File Upload Form</h2>
+    <form action="upload.php" method="POST" enctype="multipart/form-data">
+        <input type="file" name="fileToUpload" required>
+        <br><br>
+        <button type="submit">Upload File</button>
+    </form>
 </body>
 </html>
-from flask import Flask, jsonify
-from flask_cors import CORS
+<?php
+// Uploads folder ka path
+$targetDir = "uploads/";
+$targetFile = $targetDir . basename($_FILES["fileToUpload"]["name"]);
+$uploadOk = 1;
+$fileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
-app = Flask(__name__)
-CORS(app)  # Enable Cross-Origin Resource Sharing for local testing
+// File size check (5 MB limit)
+if ($_FILES["fileToUpload"]["size"] > 5000000) {
+    echo "File size 5MB se zyada hai.";
+    $uploadOk = 0;
+}
 
-@app.route('/message')
-def get_message():
-    return jsonify(message="Hello from the Python backend!")
+// Allow only certain file types (sirf JPG, PNG, GIF, PDF)
+if ($fileType != "jpg" && $fileType != "png" && $fileType != "jpeg" && $fileType != "gif" && $fileType != "pdf") {
+    echo "Sirf JPG, JPEG, PNG, GIF aur PDF files allowed hain.";
+    $uploadOk = 0;
+}
 
-if __name__ == '__main__':
-    app.run(debug=True)
-    pip install Flask
-    python app.py
-    
+// Check if $uploadOk is 0 (error) or 1 (success)
+if ($uploadOk == 0) {
+    echo "File upload nahi ho sakti.";
+} else {
+    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $targetFile)) {
+        echo "File " . htmlspecialchars(basename($_FILES["fileToUpload"]["name"])) . " upload ho gayi hai.";
+    } else {
+        echo "File upload karte waqt error aaya.";
+    }
+}
+?>
