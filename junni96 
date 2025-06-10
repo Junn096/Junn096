@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>96juned</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96c93d);
+            background-size: 400%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            animation: gradientShift 15s ease infinite, fadeIn 1s ease-in;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        h1 {
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            font-size: 2.5em;
+            overflow: hidden;
+            white-space: nowrap;
+            animation: typing 3s steps(30, end) forwards;
+        }
+
+        @keyframes typing {
+            0% { width: 0; }
+            100% { width: 100%; }
+        }
+
+        .container {
+            width: 80%;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            animation: popIn 0.5s ease;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .search-section, .form-section, .app-list {
+            margin: 20px 0;
+        }
+
+        input, textarea {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: box-shadow 0.3s, transform 0.3s;
+        }
+
+        input:focus, textarea:focus {
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+            transform: scale(1.02);
+        }
+
+        input[type="hidden"] {
+            display: none; /* Ensure hidden input is not visible */
+        }
+
+        .search-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            max-width: 200px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: transform 0.3s, background 0.3s;
+            animation: pulse 2s infinite;
+        }
+
+        .download-btn {
+            background: #000000; /* Black background for download button */
+            color: #ffffff; /* White text */
+            border: none;
+            padding: 10px;
+            width: 100%;
+            max-width: 200px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: transform 0.3s, background 0.3s;
+            animation: pulse 2s infinite;
+            text-align: center;
+            display: inline-block;
+        }
+
+        .delete-btn {
+            background: #ff0000; /* Red background for delete button */
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            max-width: 100px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: transform 0.3s, background 0.3s;
+            animation: pulse 2s infinite;
+            display: none; /* Hidden by default */
+        }
+
+        #codeBtn {
+            background: #28a745; /* Green background for code button */
+            color: white;
+        }
+
+        #searchBtn {
+            background: linear-gradient(45deg, #ff4d4d, #4d79ff); /* Unique gradient for search button */
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            max-width: 200px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: glowSpin 3s infinite ease-in-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes glowSpin {
+            0% {
+                transform: scale(1) rotate(0deg);
+                box-shadow: 0 0 10px rgba(255, 77, 77, 0.7);
+            }
+            50% {
+                transform: scale(1.05) rotate(5deg);
+                box-shadow: 0 0 20px rgba(77, 121, 255, 0.9);
+            }
+            100% {
+                transform: scale(1) rotate(0deg);
+                box-shadow: 0 0 10px rgba(255, 77, 77, 0.7);
+            }
+        }
+
+        button:hover {
+            background: #0056b3;
+            transform: scale(1.05);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .download-btn:hover {
+            background: #333333; /* Slightly lighter black on hover */
+            transform: scale(1.05);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .delete-btn:hover {
+            background: #cc0000; /* Darker red on hover */
+            transform: scale(1.05);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        #codeBtn:hover {
+            background: #218838; /* Darker green on hover */
+            transform: scale(1.05);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        #searchBtn:hover {
+            background: linear-gradient(45deg, #ff6666, #668cff); /* Brighter gradient on hover */
+            transform: scale(1.1);
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        button:active, .download-btn:active, .delete-btn:active, #codeBtn:active, #searchBtn:active {
+            animation: bounce 0.3s;
+        }
+
+        #searchBtn:active {
+            animation: shake 0.3s;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes bounce {
+            0% { transform: scale(1); }
+            50% { transform: scale(0.95); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+            100% { transform: translateX(0); }
+        }
+
+        .app-card {
+            background: #f8f9fa;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.5s;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .app-card:hover {
+            transform: rotateY(10deg) translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .app-card img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 5px;
+            transition: transform 0.3s;
+        }
+
+        .app-card img:hover {
+            transform: scale(1.1);
+        }
+
+        .app-card a {
+            color: #ffffff; /* White text for download button */
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .app-card a:hover {
+            text-decoration: none; /* Remove underline on hover for button */
+        }
+
+        .error {
+            color: red;
+            display: none;
+            font-weight: bold;
+        }
+
+        .success {
+            color: green;
+            display: none;
+            font-weight: bold;
+        }
+
+        #codePrompt, #deletePrompt {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+
+        #codePrompt input, #deletePrompt input {
+            margin-bottom: 10px;
+        }
+
+        #codePrompt button, #deletePrompt button {
+            width: 100px;
+            margin: 0 5px;
+        }
+
+        #uploadForm {
+            display: none; /* Hidden until code is verified */
+        }
+    </style>
+</head>
+<body>
+    <h1>96juned</h1>
+    <div class="container">
+        <!-- Search Section -->
+        <div class="search-section">
+            <h2>Search Apps</h2>
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Search by app name">
+                <button id="searchBtn">Search</button>
+            </div>
+        </div>
+
+        <!-- App List -->
+        <div class="app-list">
+            <h2>Available Apps</h2>
+            <div id="appList"></div>
+        </div>
+
+        <!-- Upload Section -->
+        <div class="form-section">
+            <h2>Upload New App</h2>
+            <button id="codeBtn" onclick="promptCode()">Enter Owner Code</button>
+            <form id="uploadForm">
+                <input type="text" id="appName" placeholder="App Name" required>
+                <input type="text" id="appPhoto" placeholder="App Photo URL (e.g., Imgur link)" required>
+                <input type="text" id="appLink" placeholder="App Download Link" required>
+                <input type="hidden" id="ownerCode" value="9696" required> <!-- Hidden owner code -->
+                <button type="submit">Upload App</button>
+            </form>
+            <p id="errorMsg" class="error">Upload Failed: Invalid owner code!</p>
+            <p id="successMsg" class="success">Upload Successful!</p>
+        </div>
+    </div>
+
+    <!-- Code Prompt for Upload -->
+    <div id="codePrompt">
+        <h3>Enter Owner Code to Upload</h3>
+        <input type="password" id="uploadCodeInput" placeholder="Owner Code">
+        <button onclick="verifyUploadCode()">Submit</button>
+        <button onclick="cancelCode()">Cancel</button>
+    </div>
+
+    <!-- Code Prompt for Delete -->
+    <div id="deletePrompt">
+        <h3>Enter Owner Code to Delete</h3>
+        <input type="password" id="deleteCodeInput" placeholder="Owner Code">
+        <button onclick="verifyDelete()">Submit</button>
+        <button onclick="cancelDelete()">Cancel</button>
+    </div>
+
+    <script>
+        const OWNER_CODE = "9696";
+        const MAX_APPS = 1000;
+        const uploadForm = document.getElementById("uploadForm");
+        const appList = document.getElementById("appList");
+        const searchInput = document.getElementById("searchInput");
+        const searchBtn = document.getElementById("searchBtn");
+        const errorMsg = document.getElementById("errorMsg");
+        const successMsg = document.getElementById("successMsg");
+        const codePrompt = document.getElementById("codePrompt");
+        const uploadCodeInput = document.getElementById("uploadCodeInput");
+        const deletePrompt = document.getElementById("deletePrompt");
+        const deleteCodeInput = document.getElementById("deleteCodeInput");
+
+        // Simulated app storage (no backend)
+        let apps = [];
+        let deleteIndex = null;
+
+        // Show code prompt for upload
+        function promptCode() {
+            codePrompt.style.display = "block";
+            uploadCodeInput.value = "";
+            uploadCodeInput.focus();
+        }
+
+        // Verify upload code
+        function verifyUploadCode() {
+            const code = uploadCodeInput.value;
+            if (code === OWNER_CODE) {
+                uploadForm.style.display = "block";
+                codePrompt.style.display = "none";
+            } else {
+                errorMsg.textContent = "Invalid owner code!";
+                errorMsg.style.display = "block";
+                codePrompt.style.display = "none";
+                setTimeout(() => {
+                    errorMsg.style.display = "none";
+                }, 3000);
+            }
+        }
+
+        // Cancel code prompt
+        function cancelCode() {
+            codePrompt.style.display = "none";
+        }
+
+        // Upload form submission
+        uploadForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            if (apps.length >= MAX_APPS) {
+                errorMsg.textContent = "Upload Failed: App limit of 1,000 reached!";
+                errorMsg.style.display = "block";
+                successMsg.style.display = "none";
+                return;
+            }
+
+            const code = document.getElementById("ownerCode").value;
+            if (code !== OWNER_CODE) {
+                errorMsg.textContent = "Upload Failed: Invalid owner code!";
+                errorMsg.style.display = "block";
+                successMsg.style.display = "none";
+                uploadForm.style.display = "none"; // Hide form if tampered
+                return;
+            }
+
+            const appName = document.getElementById("appName").value.trim();
+            const appPhoto = document.getElementById("appPhoto").value.trim();
+            const appLink = document.getElementById("appLink").value.trim();
+
+            // Basic URL validation
+            const urlPattern = /^(https?:\/\/)/i;
+            if (!urlPattern.test(appPhoto)) {
+                errorMsg.textContent = "Upload Failed: Please enter a valid photo URL (starting with http:// or https://)";
+                errorMsg.style.display = "block";
+                successMsg.style.display = "none";
+                return;
+            }
+            if (!urlPattern.test(appLink)) {
+                errorMsg.textContent = "Upload Failed: Please enter a valid download link (starting with http:// or https://)";
+                errorMsg.style.display = "block";
+                successMsg.style.display = "none";
+                return;
+            }
+
+            // Add app to list
+            apps.push({ name: appName, photo: appPhoto, link: appLink });
+            displayApps();
+
+            // Show success message and reset form
+            errorMsg.style.display = "none";
+            successMsg.style.display = "block";
+            uploadForm.reset();
+            document.getElementById("ownerCode").value = "9696"; // Reset hidden code
+
+            // Hide success message after 3 seconds
+            setTimeout(() => {
+                successMsg.style.display = "none";
+            }, 3000);
+        });
+
+        // Search functionality
+        searchBtn.addEventListener("click", function () {
+            const query = searchInput.value.toLowerCase().trim();
+            displayApps(query);
+        });
+
+        // Allow search on Enter key
+        searchInput.addEventListener("keypress", function (e) {
+            if (e.key === "Enter") {
+                searchBtn.click();
+            }
+        });
+
+        function displayApps(query = "") {
+            appList.innerHTML = "";
+            const filteredApps = apps.filter(app => app.name.toLowerCase().includes(query));
+            if (filteredApps.length === 0 && query) {
+                appList.innerHTML = '<p>No apps found.</p>';
+                return;
+            }
+            filteredApps.forEach((app, index) => {
+                const appCard = document.createElement("div");
+                appCard.className = "app-card";
+                appCard.innerHTML = `
+                    <img src="${app.photo}" alt="${app.name} icon" onerror="this.src='https://via.placeholder.com/100'"/>
+                    <div>
+                        <h3>${app.name}</h3>
+                        <a href="${app.link}" target="_blank" class="download-btn">Download App</a>
+                        <button class="delete-btn" onclick="promptDelete(${index})">Delete</button>
+                    </div>
+                `;
+                appList.appendChild(appCard);
+            });
+        }
+
+        function promptDelete(index) {
+            deleteIndex = index;
+            deletePrompt.style.display = "block";
+            deleteCodeInput.value = "";
+            deleteCodeInput.focus();
+        }
+
+        function verifyDelete() {
+            const code = deleteCodeInput.value;
+            if (code === OWNER_CODE) {
+                apps.splice(deleteIndex, 1);
+                displayApps(searchInput.value.toLowerCase().trim());
+                deletePrompt.style.display = "none";
+                successMsg.textContent = "App deleted successfully!";
+                successMsg.style.display = "block";
+                setTimeout(() => {
+                    successMsg.style.display = "none";
+                }, 3000);
+            } else {
+                errorMsg.textContent = "Delete Failed: Invalid owner code!";
+                errorMsg.style.display = "block";
+                setTimeout(() => {
+                    errorMsg.style.display = "none";
+                }, 3000);
+            }
+        }
+
+        function cancelDelete() {
+            deletePrompt.style.display = "none";
+            deleteIndex = null;
+        }
+    </script>
+</body>
+</html>
